@@ -1,1 +1,10 @@
-{}
+{
+	"auth": {
+		"appsyncofflinemutati8c51ddca": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}
