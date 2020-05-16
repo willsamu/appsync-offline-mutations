@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.10.1",
     "@react-native-community/netinfo": "^5.8.1",
     "@wora/apollo-cache": "^2.2.0",
     "@wora/apollo-offline": "^2.3.0",
