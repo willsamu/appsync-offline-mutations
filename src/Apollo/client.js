@@ -6,6 +6,7 @@ import { createAuthLink } from 'aws-appsync-auth-link';
 import { createSubscriptionHandshakeLink } from 'aws-appsync-subscription-link';
 import { ApolloLink } from 'apollo-link';
 
+import onMutationCompleteHandler from './onMutationCompleteHandler';
 import config from '../../aws-exports';
 
 const url = config.aws_appsync_graphqlEndpoint;
@@ -39,7 +40,10 @@ client.setOfflineOptions({
   manualExecution: false, // optional
   start: async (mutations) => mutations,
   onExecute: async (mutation) => mutation,
-  onComplete: async () => true,
+  onComplete: async (options) => {
+    onMutationCompleteHandler(client, options.response);
+    return true;
+  },
   onDiscard: async () => true,
   onPublish: async (offlinePayload) => offlinePayload,
 });
