@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useQuery, useMutation } from 'react-apollo';
 import { View, Button, TextInput, Text, StyleSheet } from 'react-native';
 import uuid from 'uuid/v4';
@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 
 /* ----------------------------- DocumentNodes ----------------------------- */
 
-export const LIST_TODOS = gql`
+const LIST_TODOS = gql`
   query ListTodos {
     listTodos {
       items {
@@ -17,7 +17,7 @@ export const LIST_TODOS = gql`
   }
 `;
 
-export const CREATE_TODO = gql`
+const CREATE_TODO = gql`
   mutation CreateTodo($input: CreateTodoInput!) {
     createTodo(input: $input) {
       id
@@ -52,16 +52,15 @@ const TestComponent = () => {
   });
 
   useEffect(() => {
-    // eslint-disable-next-line no-unused-expressions
     (queryError || mutationError) && console.log('E R R O R: ', queryError, mutationError);
   }, [queryError, mutationError]);
 
   const [todoInput, setTodoInput] = useState('');
-  const setInput = (input) => setTodoInput(input);
-  const createTodo = () => {
+  const setInput = useCallback((value) => setTodoInput(value), [setTodoInput]);
+  const createTodo = useCallback(() => {
     createTodoMutation({ variables: { input: { id: uuid(), name: todoInput } } });
     setTodoInput('');
-  };
+  }, [createTodoMutation, setTodoInput, todoInput]);
 
   return (
     <View style={styles.container}>

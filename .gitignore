@@ -1,5 +1,6 @@
 node_modules/**/*
 .expo/*
+.expo-shared/*
 npm-debug.*
 *.jks
 *.p8
@@ -14,6 +15,7 @@ web-report/
 .DS_Store
 
 # amplify
+amplify
 amplify/\#current-cloud-backend
 amplify/.config/local-*
 amplify/mock-data

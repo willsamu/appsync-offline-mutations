@@ -4,11 +4,12 @@ import { ApolloClientOffline } from '@wora/apollo-offline/lib/ApolloClientOfflin
 
 const Rehydration = ({ children }) => {
   const client = useApolloClient();
-  const [rehydrated, setRehydrated] = useState(false);
+  const [rehydrated, setRehydrated] = useState(client.isRehydrated());
 
   useEffect(() => {
-    // eslint-disable-next-line no-unused-expressions
-    client instanceof ApolloClientOffline && client.hydrate().then(() => setRehydrated(true));
+    client instanceof ApolloClientOffline &&
+      !client.isRehydrated() &&
+      client.hydrate().then(() => setRehydrated(true));
   }, [client]);
   return rehydrated ? <>{children}</> : null;
 };
