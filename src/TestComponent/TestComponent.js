@@ -49,6 +49,12 @@ const TestComponent = () => {
   const { data, error: queryError } = useQuery(LIST_TODOS, { fetchPolicy: 'cache-and-network' });
   const [createTodoMutation, { error: mutationError }] = useMutation(CREATE_TODO, {
     update: (client, mutationData) => handleUpdateTodo(client, mutationData),
+    optimisticResponse: ({ input }) => ({
+      createTodo: {
+        __typename: 'Todo',
+        ...input,
+      },
+    }),
   });
 
   useEffect(() => {
