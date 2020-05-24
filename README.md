@@ -1,6 +1,6 @@
 # About
 
-This is the corresponding repository to article on [how to set up AppSync with offline support and react hooks]().
+This is the corresponding repository to article on [how to set up AppSync with offline support and react hooks](https://dev.to/willsamu/how-to-get-aws-appsync-running-with-offline-support-and-react-hooks-678).
 
 ## Setup
 
